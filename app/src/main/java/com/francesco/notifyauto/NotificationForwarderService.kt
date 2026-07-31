@@ -46,6 +46,13 @@ class NotificationForwarderService : NotificationListenerService() {
         getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
     }
 
+    override fun onNotificationRemoved(sbn: StatusBarNotification) {
+        // La notifica originale è stata letta o cancellata sul telefono:
+        // togliamo anche la copia inoltrata, così l'auto resta pulita.
+        if (sbn.packageName == packageName) return
+        NotificationManagerCompat.from(this).cancel(sbn.key.hashCode())
+    }
+
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         // Mai rielaborare le nostre stesse notifiche: eviterebbe un loop infinito
         if (sbn.packageName == packageName) return

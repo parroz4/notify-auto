@@ -61,6 +61,13 @@
             android:text="@string/deselect_all" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/clear_notifications_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_notifications" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/app_list"
         android:layout_width="match_parent"

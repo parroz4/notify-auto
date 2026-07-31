@@ -68,6 +68,9 @@ class MainActivity : AppCompatActivity() {
             Prefs.setPackagesEnabled(this, filteredApps().map { it.packageName }, false)
             refreshList()
         }
+        findViewById<Button>(R.id.clear_notifications_button).setOnClickListener {
+            NotificationManagerCompat.from(this).cancelAll()
+        }
 
         allApps = loadApps()
         refreshList()
