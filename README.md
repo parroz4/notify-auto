@@ -7,6 +7,9 @@ Android Auto mostra solo le notifiche in stile "messaggistica" (MessagingStyle):
 ## Funzionalità
 
 - ✅ Scegli quali app inoltrare (interruttore per ogni app installata)
+- 🔍 Barra di ricerca per nome app o package
+- ☑️ Pulsanti "Attiva tutte" / "Disattiva tutte", applicati alle sole app filtrate dalla ricerca
+- 📂 App raggruppate per categoria (Giochi, Social, Musica, …)
 - 🚗 Opzione "Inoltra solo quando connesso ad Android Auto" (attiva di default) — rileva la connessione interrogando il content provider di Android Auto, senza dipendenze extra
 - 🔇 Salta notifiche persistenti (musica, servizi in foreground) e riepiloghi di gruppo
 - 🔁 Nessun loop: le notifiche generate dall'app stessa non vengono mai rielaborate
@@ -19,13 +22,18 @@ Android Auto mostra solo le notifiche in stile "messaggistica" (MessagingStyle):
 
 Le azioni *Rispondi* / *Segna come letto* chiudono semplicemente la notifica inoltrata: non interagiscono con l'app di origine.
 
+## Download
+
+📥 **[Scarica l'ultima versione](https://github.com/parroz4/notify-auto/releases/latest)** dalla sezione Releases.
+
 ## Installazione
 
-1. Compila (`gradle assembleDebug`) o scarica l'APK e installalo sul telefono
-2. Apri NotifyAuto → **Concedi accesso alle notifiche**
-3. Attiva le app da inoltrare
-4. In **Android Auto → Impostazioni**, tocca 10 volte "Versione" per sbloccare le opzioni sviluppatore, poi attiva **Sorgenti sconosciute**
-5. Collega il telefono all'auto
+1. Scarica l'APK dalle [Releases](https://github.com/parroz4/notify-auto/releases/latest) (o compilalo con `gradle assembleDebug`) e installalo sul telefono
+2. Se Android blocca il permesso: **Impostazioni → App → NotifyAuto → ⋮ → Consenti impostazioni con limitazioni** (necessario per le app installate fuori dal Play Store)
+3. Apri NotifyAuto → **Concedi accesso alle notifiche**
+4. Attiva le app da inoltrare (con ricerca, selezione multipla e raggruppamento per categoria)
+5. In **Android Auto → Impostazioni**, tocca 10 volte "Versione" per sbloccare le opzioni sviluppatore, poi attiva **Sorgenti sconosciute**
+6. Collega il telefono all'auto
 
 ## Build
 
