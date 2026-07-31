@@ -1,0 +1,19 @@
+# Gradle
+.gradle/
+build/
+
+# Config locale (percorso SDK della macchina)
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Artefatti
+*.apk
+*.aab
+captures/
+
+# Impostazioni locali Claude
+.claude/

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NotifyAuto</string>
+    <string name="channel_name">Notifiche inoltrate ad Android Auto</string>
+    <string name="channel_description">Copie delle notifiche di altre app, in formato leggibile da Android Auto</string>
+    <string name="status_listener_ok">✅ Accesso alle notifiche attivo</string>
+    <string name="status_listener_missing">⚠️ Serve l\'accesso alle notifiche per poterle inoltrare</string>
+    <string name="grant_access">Concedi accesso alle notifiche</string>
+    <string name="only_when_connected">Inoltra solo quando connesso ad Android Auto</string>
+    <string name="apps_header">App da inoltrare</string>
+    <string name="action_mark_read">Segna come letto</string>
+    <string name="action_reply">Rispondi</string>
+</resources>
