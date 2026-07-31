@@ -84,6 +84,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateStatus()
+        // Riporta in cima le app attivate durante la sessione precedente
+        if (allApps.isNotEmpty()) refreshList()
     }
 
     private fun updateStatus() {
@@ -104,11 +106,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** Raggruppa le app filtrate per categoria e appiattisce in righe per la lista. */
+    /**
+     * Costruisce le righe della lista: prima le app attive, poi le restanti
+     * raggruppate per categoria. La lista non viene ricostruita a ogni tocco
+     * dell'interruttore, altrimenti la riga scapperebbe da sotto il dito.
+     */
     private fun refreshList() {
-        val other = getString(R.string.category_other)
+        val enabled = Prefs.enabledPackages(this)
+        val filtered = filteredApps()
         val rows = mutableListOf<Row>()
-        filteredApps()
+
+        val (active, inactive) = filtered.partition { it.packageName in enabled }
+        if (active.isNotEmpty()) {
+            rows.add(Row.Header(getString(R.string.category_active, active.size)))
+            active.forEach { rows.add(Row.App(it)) }
+        }
+
+        val other = getString(R.string.category_other)
+        inactive
             .groupBy { it.category }
             .toSortedMap(compareBy<String> { it == other }.thenBy { it.lowercase() })
             .forEach { (category, apps) ->
