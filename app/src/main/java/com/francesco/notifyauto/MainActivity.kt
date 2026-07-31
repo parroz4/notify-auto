@@ -7,7 +7,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -20,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var statusText: TextView
     private lateinit var grantButton: Button
+    private lateinit var adapter: AppListAdapter
+
+    private var allApps: List<AppEntry> = emptyList()
+    private var query: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +45,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        adapter = AppListAdapter(this)
         findViewById<RecyclerView>(R.id.app_list).apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = AppListAdapter(this@MainActivity, loadApps())
+            adapter = this@MainActivity.adapter
         }
+
+        findViewById<EditText>(R.id.search_input).addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                query = s?.toString()?.trim().orEmpty()
+                refreshList()
+            }
+        })
+
+        findViewById<Button>(R.id.select_all_button).setOnClickListener {
+            Prefs.setPackagesEnabled(this, filteredApps().map { it.packageName }, true)
+            refreshList()
+        }
+        findViewById<Button>(R.id.deselect_all_button).setOnClickListener {
+            Prefs.setPackagesEnabled(this, filteredApps().map { it.packageName }, false)
+            refreshList()
+        }
+
+        allApps = loadApps()
+        refreshList()
 
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
@@ -67,6 +96,28 @@ class MainActivity : AppCompatActivity() {
         grantButton.visibility = if (granted) Button.GONE else Button.VISIBLE
     }
 
+    private fun filteredApps(): List<AppEntry> {
+        if (query.isBlank()) return allApps
+        return allApps.filter {
+            it.label.contains(query, ignoreCase = true) ||
+                it.packageName.contains(query, ignoreCase = true)
+        }
+    }
+
+    /** Raggruppa le app filtrate per categoria e appiattisce in righe per la lista. */
+    private fun refreshList() {
+        val other = getString(R.string.category_other)
+        val rows = mutableListOf<Row>()
+        filteredApps()
+            .groupBy { it.category }
+            .toSortedMap(compareBy<String> { it == other }.thenBy { it.lowercase() })
+            .forEach { (category, apps) ->
+                rows.add(Row.Header(category))
+                apps.forEach { rows.add(Row.App(it)) }
+            }
+        adapter.submit(rows)
+    }
+
     private fun loadApps(): List<AppEntry> {
         val launcherIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
         val launchable = packageManager.queryIntentActivities(launcherIntent, 0)
@@ -84,7 +135,9 @@ class MainActivity : AppCompatActivity() {
                 AppEntry(
                     packageName = it.packageName,
                     label = packageManager.getApplicationLabel(it).toString(),
-                    icon = packageManager.getApplicationIcon(it)
+                    icon = packageManager.getApplicationIcon(it),
+                    category = ApplicationInfo.getCategoryTitle(this, it.category)
+                        ?.toString() ?: getString(R.string.category_other)
                 )
             }
             .sortedBy { it.label.lowercase() }

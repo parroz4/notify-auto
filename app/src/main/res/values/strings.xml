@@ -10,4 +10,8 @@
     <string name="apps_header">App da inoltrare</string>
     <string name="action_mark_read">Segna come letto</string>
     <string name="action_reply">Rispondi</string>
+    <string name="search_hint">Cerca app…</string>
+    <string name="select_all">Attiva tutte</string>
+    <string name="deselect_all">Disattiva tutte</string>
+    <string name="category_other">Altre app</string>
 </resources>

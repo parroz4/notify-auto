@@ -20,6 +20,12 @@ object Prefs {
         sp(context).edit().putStringSet(KEY_ENABLED_PACKAGES, current).apply()
     }
 
+    fun setPackagesEnabled(context: Context, packageNames: Collection<String>, enabled: Boolean) {
+        val current = enabledPackages(context).toMutableSet()
+        if (enabled) current.addAll(packageNames) else current.removeAll(packageNames.toSet())
+        sp(context).edit().putStringSet(KEY_ENABLED_PACKAGES, current).apply()
+    }
+
     fun onlyWhenConnected(context: Context): Boolean =
         sp(context).getBoolean(KEY_ONLY_WHEN_CONNECTED, true)
 
