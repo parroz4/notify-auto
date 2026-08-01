@@ -74,6 +74,17 @@ gradle assembleDebug
 
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 
+Release builds are signed with a key that is not part of this repository. To build your own signed release, create a `keystore.properties` file in the project root (it is git-ignored) pointing at your own keystore:
+
+```properties
+storeFile=/path/to/your.jks
+storePassword=…
+keyAlias=…
+keyPassword=…
+```
+
+Then run `gradle assembleRelease`. Without that file the project still builds debug APKs normally.
+
 ## Requirements
 
 - Android 8.0+ (minSdk 26)

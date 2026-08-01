@@ -17,3 +17,8 @@ captures/
 
 # Impostazioni locali Claude
 .claude/
+
+# Firma di release: MAI versionare chiavi e password
+keystore.properties
+*.jks
+*.keystore
