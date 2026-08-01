@@ -16,4 +16,7 @@
     <string name="category_other">Altre app</string>
     <string name="category_active">★ App attive (%1$d)</string>
     <string name="clear_notifications">🧹 Cancella notifiche inoltrate</string>
+    <string name="car_screen_message">Le notifiche delle app selezionate vengono inoltrate al centro notifiche dell\'auto.</string>
+    <string name="car_clear_button">🧹 Cancella tutte</string>
+    <string name="car_cleared">Notifiche cancellate</string>
 </resources>
