@@ -19,7 +19,13 @@ It listens to your phone's notifications, and re-publishes the ones you choose i
 
 Nothing is installed in the car: the phone does all the work.
 
-| Pick your apps | Search and filter |
+**On the car screen** — the list of forwarded notifications, with one-tap dismissal:
+
+![Forwarded notifications on the Android Auto screen](docs/screenshots/car-list.png)
+
+**On the phone** — pick which apps get forwarded:
+
+| Enabled apps pinned on top | Search and filter |
 |:--:|:--:|
 | <img src="docs/screenshots/main.png" width="300" alt="Main screen with enabled apps pinned to the top"> | <img src="docs/screenshots/search.png" width="300" alt="Searching apps by name or package"> |
 
