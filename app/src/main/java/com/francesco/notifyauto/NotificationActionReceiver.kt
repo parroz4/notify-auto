@@ -15,6 +15,7 @@ class NotificationActionReceiver : BroadcastReceiver() {
         val id = intent.getIntExtra(NotificationForwarderService.EXTRA_NOTIFICATION_ID, -1)
         if (id != -1) {
             NotificationManagerCompat.from(context).cancel(id)
+            ForwardedNotifications.notifyChanged()
         }
     }
 }

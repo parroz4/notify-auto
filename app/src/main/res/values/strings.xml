@@ -19,4 +19,6 @@
     <string name="car_screen_message">Le notifiche delle app selezionate vengono inoltrate al centro notifiche dell\'auto.</string>
     <string name="car_clear_button">🧹 Cancella tutte</string>
     <string name="car_cleared">Notifiche cancellate</string>
+    <string name="car_empty">Nessuna notifica inoltrata al momento. Tutto tranquillo 🙂</string>
+    <string name="car_list_title">Notifiche inoltrate</string>
 </resources>

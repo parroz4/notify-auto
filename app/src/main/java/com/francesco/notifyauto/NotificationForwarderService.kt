@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import androidx.car.app.notification.CarAppExtender
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.Person
@@ -26,6 +27,9 @@ class NotificationForwarderService : NotificationListenerService() {
         const val ACTION_MARK_READ = "com.francesco.notifyauto.MARK_READ"
         const val ACTION_REPLY = "com.francesco.notifyauto.REPLY"
         const val REMOTE_INPUT_KEY = "reply_text"
+        const val EXTRA_SRC_APP = "src_app"
+        const val EXTRA_SRC_TITLE = "src_title"
+        const val EXTRA_SRC_TEXT = "src_text"
     }
 
     override fun onCreate() {
@@ -51,6 +55,7 @@ class NotificationForwarderService : NotificationListenerService() {
         // togliamo anche la copia inoltrata, così l'auto resta pulita.
         if (sbn.packageName == packageName) return
         NotificationManagerCompat.from(this).cancel(sbn.key.hashCode())
+        ForwardedNotifications.notifyChanged()
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
@@ -127,10 +132,24 @@ class NotificationForwarderService : NotificationListenerService() {
             .addAction(markReadAction)
             .addAction(replyAction)
             .extend(NotificationCompat.CarExtender())
+            // Da quando l'app dichiara anche il supporto template (icona nel
+            // launcher dell'auto), Android Auto elenca nel centro notifiche
+            // solo le notifiche marcate con l'estensione delle app per auto.
+            .extend(
+                CarAppExtender.Builder()
+                    .setImportance(NotificationManager.IMPORTANCE_HIGH)
+                    .build()
+            )
             .build()
+
+        // Copie in chiaro per la lista mostrata sullo schermo dell'auto
+        forwarded.extras.putString(EXTRA_SRC_APP, appLabel)
+        forwarded.extras.putString(EXTRA_SRC_TITLE, title ?: "")
+        forwarded.extras.putString(EXTRA_SRC_TEXT, text ?: "")
 
         try {
             NotificationManagerCompat.from(this).notify(notificationId, forwarded)
+            ForwardedNotifications.notifyChanged()
         } catch (_: SecurityException) {
             // Permesso POST_NOTIFICATIONS revocato: non possiamo inoltrare
         }
