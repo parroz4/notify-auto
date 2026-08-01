@@ -19,6 +19,10 @@ It listens to your phone's notifications, and re-publishes the ones you choose i
 
 Nothing is installed in the car: the phone does all the work.
 
+| Pick your apps | Search and filter |
+|:--:|:--:|
+| <img src="docs/screenshots/main.png" width="300" alt="Main screen with enabled apps pinned to the top"> | <img src="docs/screenshots/search.png" width="300" alt="Searching apps by name or package"> |
+
 ## Features
 
 - ✅ **Pick the apps you want** — a switch per installed app
@@ -101,6 +105,8 @@ Then run `gradle assembleRelease`. Without that file the project still builds de
 **Inoltra le notifiche di qualsiasi app Android sullo schermo di Android Auto.**
 
 Android Auto mostra solo le notifiche in stile "messaggistica": quelle delle app normali (banca, corriere, casa smart, calendario) vengono ignorate, e finisci per prendere in mano il telefono mentre guidi. NotifyAuto le intercetta e le ripubblica in un formato che Android Auto visualizza e che l'Assistente può leggere ad alta voce. In auto non si installa nulla: fa tutto il telefono.
+
+<img src="docs/screenshots/main-it.png" width="300" alt="Schermata principale con le app attive in cima">
 
 ### Funzionalità
 
