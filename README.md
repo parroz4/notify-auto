@@ -26,6 +26,15 @@ Le azioni *Rispondi* / *Segna come letto* chiudono semplicemente la notifica ino
 
 📥 **[Scarica l'ultima versione](https://github.com/parroz4/notify-auto/releases/latest)** dalla sezione Releases.
 
+### Aggiornamenti automatici con Obtainium (consigliato)
+
+[Obtainium](https://github.com/ImranR98/Obtainium) installa e aggiorna le app direttamente dalle release GitHub, come uno store:
+
+1. Installa Obtainium (dalle [sue release](https://github.com/ImranR98/Obtainium/releases/latest))
+2. Apri Obtainium → **Aggiungi app**
+3. Incolla l'URL di questo repository: `https://github.com/parroz4/notify-auto`
+4. Tocca **Aggiungi**: Obtainium installa l'ultima versione e ti avviserà a ogni nuova release
+
 ## Installazione
 
 1. Scarica l'APK dalle [Releases](https://github.com/parroz4/notify-auto/releases/latest) (o compilalo con `gradle assembleDebug`) e installalo sul telefono
