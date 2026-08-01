@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="channel_name">Notifiche inoltrate ad Android Auto</string>
+    <string name="channel_description">Copie delle notifiche di altre app, in formato leggibile da Android Auto</string>
+    <string name="status_listener_ok">✅ Accesso alle notifiche attivo</string>
+    <string name="status_listener_missing">⚠️ Serve l\'accesso alle notifiche per poterle inoltrare</string>
+    <string name="grant_access">Concedi accesso alle notifiche</string>
+    <string name="only_when_connected">Inoltra solo quando connesso ad Android Auto</string>
+    <string name="action_mark_read">Segna come letto</string>
+    <string name="action_reply">Rispondi</string>
+    <string name="search_hint">Cerca app…</string>
+    <string name="select_all">Attiva tutte</string>
+    <string name="deselect_all">Disattiva tutte</string>
+    <string name="category_other">Altre app</string>
+    <string name="category_active">★ App attive (%1$d)</string>
+    <string name="clear_notifications">🧹 Cancella notifiche inoltrate</string>
+    <string name="car_clear_button">🧹 Cancella tutte</string>
+    <string name="car_cleared">Notifiche cancellate</string>
+    <string name="car_empty">Nessuna notifica inoltrata al momento. Tutto tranquillo 🙂</string>
+    <string name="car_list_title">Notifiche inoltrate</string>
+</resources>
